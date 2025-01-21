@@ -1,8 +1,8 @@
 /*
   Content-Type: application/javascript
-  X-Content-Type-Options: nosniff
   Access-Control-Allow-Origin: *
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' chrome-extension: https:; connect-src 'self' https: wss: ws:; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; frame-src 'self' chrome-extension:; worker-src 'self' blob:;
+  Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob: ws:; connect-src 'self' https: wss: ws:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: chrome-extension:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:;
+  X-Content-Type-Options: nosniff
 
 /*.jsx
   Content-Type: application/javascript
