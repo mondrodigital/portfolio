@@ -1,13 +1,13 @@
 /*
   Content-Type: application/javascript
   Access-Control-Allow-Origin: *
-  Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob: ws:; connect-src 'self' https: wss: ws:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: chrome-extension:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:;
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' chrome-extension: https:; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https: wss: ws:; font-src 'self' data:; frame-src 'self' chrome-extension:; worker-src 'self' blob:;
   X-Content-Type-Options: nosniff
 
-/*.jsx
+/*.js
   Content-Type: application/javascript
 
-/*.js
+/*.jsx
   Content-Type: application/javascript
 
 /*.css
