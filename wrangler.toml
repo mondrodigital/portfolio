@@ -2,14 +2,16 @@ name = "portfolio"
 
 [build]
 command = "npm run build"
-pages_build_output_dir = "dist"
-
-[site]
-bucket = "dist"
+output_dir = "dist"
+base = "/"
 
 [build.environment]
 NODE_VERSION = "18"
 NPM_VERSION = "9"
+
+[site]
+bucket = "./dist"
+entry-point = "dist/index.html"
 
 [[redirects]]
 from = "/*"
