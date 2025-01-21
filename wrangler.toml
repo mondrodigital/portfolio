@@ -2,10 +2,10 @@ name = "portfolio"
 
 [build]
 command = "npm run build"
-publish = "dist"
+pages_build_output_dir = "dist"
 
 [site]
-bucket = "./dist"
+bucket = "dist"
 
 [build.environment]
 NODE_VERSION = "18"
