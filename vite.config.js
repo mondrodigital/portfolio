@@ -3,33 +3,20 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react({
-      jsxRuntime: 'automatic',
-      jsxImportSource: 'react',
-      babel: {
-        plugins: [
-          ['@babel/plugin-transform-react-jsx', { runtime: 'automatic' }]
-        ]
-      }
-    })
-  ],
+  plugins: [react()],
   build: {
     rollupOptions: {
       output: {
         format: 'es',
-        entryFileNames: '[name].js',
-        chunkFileNames: 'chunks/[name]-[hash].js',
-        assetFileNames: 'assets/[name]-[hash][extname]'
+        entryFileNames: `assets/[name]-[hash].js`,
+        chunkFileNames: `assets/[name]-[hash].js`,
+        assetFileNames: `assets/[name]-[hash].[ext]`
       }
     },
     sourcemap: true
   },
-  esbuild: {
-    jsxInject: `import React from 'react'`,
-    loader: 'jsx',
-    include: /src\/.*\.jsx?$/,
-    exclude: []
+  resolve: {
+    extensions: ['.js', '.jsx', '.json']
   },
   server: {
     headers: {
