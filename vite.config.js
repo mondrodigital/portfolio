@@ -20,7 +20,7 @@ export default defineConfig({
   },
   server: {
     headers: {
-      'Content-Type': 'application/javascript',
+      'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' chrome-extension: https:; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' ws: wss: https:; font-src 'self' data:; frame-src 'self' chrome-extension:; worker-src 'self' blob:; manifest-src 'self';"
     }
   }
 })
