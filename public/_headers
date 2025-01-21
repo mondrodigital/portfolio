@@ -1,2 +1,10 @@
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' https:; 
+  Content-Type: application/javascript
+  X-Content-Type-Options: nosniff
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' chrome-extension: https:; connect-src 'self' https:; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; frame-src 'self'; worker-src 'self' blob:; manifest-src 'self'; media-src 'self'
+
+/*.jsx
+  Content-Type: application/javascript
+
+/*.js
+  Content-Type: application/javascript 
