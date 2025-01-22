@@ -8,19 +8,22 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
+    cssCodeSplit: false,
     rollupOptions: {
       output: {
-        entryFileNames: 'assets/main.js',
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'assets/main.css';
-          return 'assets/[name].[ext]';
-        }
+        manualChunks: undefined,
+        entryFileNames: 'assets/[name].js',
+        assetFileNames: 'assets/[name].[ext]'
       }
     }
   },
   server: {
     port: 3001,
     strictPort: false,
-    host: true
+    host: true,
+    headers: {
+      'Cross-Origin-Opener-Policy': 'same-origin',
+      'Cross-Origin-Embedder-Policy': 'require-corp'
+    }
   },
 })
