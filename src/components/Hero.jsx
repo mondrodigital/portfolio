@@ -31,8 +31,8 @@ const Hero = () => {
   return (
     <div className="pt-16 bg-[#f7f7f7] relative z-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="flex h-[300px] relative">
-          <div className="flex-1">
+        <div className="flex flex-col lg:flex-row lg:h-[300px] relative">
+          <div className="flex-1 mb-12 lg:mb-0">
             <div className="flex-grow">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
@@ -41,7 +41,7 @@ const Hero = () => {
                   duration: 1,
                   ease: "easeOut"
                 }}
-                className="text-6xl font-faction mb-4 text-black"
+                className="text-4xl sm:text-5xl lg:text-6xl font-faction mb-4 text-black"
               >
                 Hello, I'm Mitch
               </motion.div>
@@ -74,7 +74,7 @@ const Hero = () => {
                         duration: 0.4
                       }
                     }}
-                    className="text-6xl text-gray-500 font-light absolute transform-gpu"
+                    className="text-2xl sm:text-4xl lg:text-6xl text-gray-500 font-light absolute transform-gpu"
                     style={{ transformOrigin: "50% 50%" }}
                   >
                     {phrases[currentPhraseIndex]}
@@ -91,7 +91,7 @@ const Hero = () => {
                 delay: 0.5,
                 ease: "easeOut"
               }}
-              className="grid grid-cols-2 gap-8 mt-16"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-8 mt-16"
             >
               <div>
                 <h3 className="text-xl font-medium mb-2">Currently</h3>
@@ -104,7 +104,7 @@ const Hero = () => {
             </motion.div>
           </div>
 
-          <div className="w-px bg-gray-200 mx-8 h-full"></div>
+          <div className="hidden lg:block w-px bg-gray-200 mx-8 h-full"></div>
 
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
@@ -114,7 +114,7 @@ const Hero = () => {
               delay: 0.3,
               ease: "easeOut"
             }}
-            className="w-96 flex flex-col justify-end"
+            className="w-full lg:w-96 flex flex-col justify-end"
           >
             <motion.div 
               initial={{ scale: 0.8, opacity: 0 }}
@@ -128,7 +128,7 @@ const Hero = () => {
               <img 
                 src="/ProfilePic.png"
                 alt="Mitch Mondro"
-                className="w-16 h-16 rounded-full object-cover"
+                className="w-12 h-12 sm:w-16 sm:h-16 rounded-full object-cover"
               />
               <motion.h2 
                 initial={{ opacity: 0 }}
@@ -137,7 +137,7 @@ const Hero = () => {
                   delay: 0.5,
                   duration: 0.8
                 }}
-                className="text-2xl font-medium"
+                className="text-xl sm:text-2xl font-medium"
               >
                 Nice to meet you
               </motion.h2>
@@ -150,7 +150,7 @@ const Hero = () => {
                 delay: 0.7,
                 duration: 0.8
               }}
-              className="text-gray-600 mb-4"
+              className="text-gray-600 text-base sm:text-lg mb-4"
             >
               I'm a full stack marketer passionate about combining marketing, human behavior, and technology to create delightful digital experiences.
             </motion.p>
@@ -165,7 +165,7 @@ const Hero = () => {
               className="flex space-x-4"
             >
               <a href="#" className="text-gray-600 hover:text-black transition-colors duration-300">
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
                 </svg>
               </a>
@@ -175,7 +175,7 @@ const Hero = () => {
                 rel="noopener noreferrer" 
                 className="text-gray-600 hover:text-black transition-colors duration-300"
               >
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <svg className="w-5 h-5 sm:w-6 sm:h-6" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
                   <rect x="2" y="9" width="4" height="12"/>
                   <circle cx="4" cy="4" r="2"/>

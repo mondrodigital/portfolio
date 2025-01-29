@@ -1,7 +1,0 @@
-{
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "deploymentStrategy": "immediate",
-  "framework": "vite",
-  "buildCache": true
-} 

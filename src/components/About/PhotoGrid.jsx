@@ -106,11 +106,11 @@ const PhotoGrid = () => {
     "/Personal Photos/about2.jpeg",
     "/Personal Photos/about3.jpeg",
     "/Personal Photos/about4.jpeg",
-    "/Personal Photos/about5.jpeg",
-    "/Personal Photos/about6.jpeg",
-    "/Personal Photos/about7.jpeg",
-    "/Personal Photos/about8.jpeg",
-    "/Personal Photos/about9.jpeg"
+    "/Personal Photos/travel1.jpeg",
+    "/Personal Photos/travel2.jpeg",
+    "/Personal Photos/travel3.jpeg",
+    "/Personal Photos/travel4.jpeg",
+    "/Personal Photos/baseball1.jpeg"
   ];
 
   return (

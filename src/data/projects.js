@@ -2,6 +2,16 @@ import { projectImages } from './images';
 
 export const projects = [
   {
+    id: 'resume-builder',
+    title: 'EZResume',
+    description: 'Built a streamlined resume editor for quick job-specific updates. Focused on speed and simplicity over AI features. Currently in beta with 10+ users reporting 75% faster resume customization.',
+    date: 'March 2024',
+    status: 'Beta',
+    image: projectImages.ezResumeCover,
+    bg: 'bg-white',
+    link: 'https://ezresume-omega.vercel.app/'
+  },
+  {
     id: 'law-firm-website',
     title: 'Law Firm Website Design',
     description: 'Built Webflow CMS for easy content updates and team management. Implemented instant consultation alerts and email analytics reports. Optimized UX based on user behavior data.',

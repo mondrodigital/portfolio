@@ -247,9 +247,9 @@ const ScrollingImages = ({ images }) => {
   const calculateWidth = (naturalWidth, naturalHeight) => {
     const aspectRatio = naturalWidth / naturalHeight;
     if (aspectRatio < 1) {
-      return 250;
+      return 200;
     }
-    return Math.floor(400 * aspectRatio);
+    return Math.floor(300 * aspectRatio);
   };
 
   // Handle image load to get natural dimensions
@@ -270,14 +270,11 @@ const ScrollingImages = ({ images }) => {
     const startScroll = () => {
       scrollInterval = setInterval(() => {
         if (scrollContainer.scrollLeft >= (scrollContainer.scrollWidth * 2) / 3) {
-          // When we reach 2/3 of the way through the second set of images,
-          // jump back to 1/3 of the way (the end of first set)
-          // This creates a seamless loop as the images are repeated
           scrollContainer.scrollLeft = scrollContainer.scrollWidth / 3;
         } else {
-          scrollContainer.scrollLeft += 2;
+          scrollContainer.scrollLeft += 1;
         }
-      }, 20);
+      }, 30);
     };
 
     // Initial setup - scroll to the first set of images
@@ -287,31 +284,37 @@ const ScrollingImages = ({ images }) => {
 
     const handleMouseEnter = () => clearInterval(scrollInterval);
     const handleMouseLeave = () => startScroll();
+    const handleTouchStart = () => clearInterval(scrollInterval);
+    const handleTouchEnd = () => startScroll();
 
     scrollContainer.addEventListener('mouseenter', handleMouseEnter);
     scrollContainer.addEventListener('mouseleave', handleMouseLeave);
+    scrollContainer.addEventListener('touchstart', handleTouchStart);
+    scrollContainer.addEventListener('touchend', handleTouchEnd);
 
     return () => {
       clearInterval(scrollInterval);
       scrollContainer.removeEventListener('mouseenter', handleMouseEnter);
       scrollContainer.removeEventListener('mouseleave', handleMouseLeave);
+      scrollContainer.removeEventListener('touchstart', handleTouchStart);
+      scrollContainer.removeEventListener('touchend', handleTouchEnd);
     };
   }, []);
 
   return (
-    <div className="relative w-full overflow-hidden mt-8">
+    <div className="relative w-full overflow-hidden mt-4 sm:mt-8">
       {/* Left fade gradient */}
-      <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
+      <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-r from-white to-transparent z-10"></div>
       
       {/* Right fade gradient */}
-      <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
+      <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-white to-transparent z-10"></div>
       
       {/* Scrolling container */}
       <div 
         ref={scrollContainerRef}
-        className="flex gap-6 overflow-x-auto scrollbar-hide py-4" 
+        className="flex gap-4 sm:gap-6 overflow-x-auto scrollbar-hide py-4" 
         style={{ 
-          scrollBehavior: 'auto', // Changed from smooth to auto for seamless transition
+          scrollBehavior: 'auto',
           WebkitOverflowScrolling: 'touch',
           scrollbarWidth: 'none',
           msOverflowStyle: 'none'
@@ -321,9 +324,9 @@ const ScrollingImages = ({ images }) => {
         {[...images, ...images, ...images].map((image, index) => (
           <div
             key={index}
-            className="flex-none h-[400px] bg-gray-100 rounded-lg overflow-hidden"
+            className="flex-none h-[250px] sm:h-[400px] bg-gray-100 rounded-lg overflow-hidden"
             style={{ 
-              width: imageDimensions[index % images.length] || 400,
+              width: imageDimensions[index % images.length] || 300,
               transition: 'width 0.3s ease'
             }}
           >
@@ -348,30 +351,31 @@ const Fun = () => {
     if (activeTab === 'Travel') {
       return (
         <>
-          <div className="flex items-start space-x-16">
-            <div className="w-1/2">
-              <p className="text-gray-600 text-lg leading-relaxed">
+          <div className="flex flex-col lg:flex-row lg:items-start lg:space-x-16">
+            <div className="w-full lg:w-1/2 mb-8 lg:mb-0">
+              <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
                 I'm passionate about exploring both the United States and international destinations whenever possible. I love experiencing different cultures, trying local cuisines, and learning about the unique traditions each place has to offer.
               </p>
             </div>
 
-            <div className="w-1/2 flex flex-wrap gap-4 pt-1">
-              {countryEmojis.map((emoji, index) => (
-                <div
-                  key={index}
-                  className="group relative"
-                >
-                  <span
-                    className="text-2xl select-none bg-gray-50 rounded-full p-2 w-12 h-12 flex items-center justify-center hover:bg-gray-100 transition-colors cursor-pointer"
+            <div className="w-full lg:w-1/2">
+              <div className="flex flex-wrap gap-4 pt-1">
+                {countryEmojis.map((emoji, index) => (
+                  <div
+                    key={index}
+                    className="group relative"
                   >
-                    {emoji.flag}
-                  </span>
-                  {/* Tooltip */}
-                  <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-white text-gray-900 px-3 py-1 rounded shadow-md text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity z-20">
-                    {emoji.country}
+                    <span
+                      className="text-xl sm:text-2xl select-none bg-gray-50 rounded-full p-2 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center hover:bg-gray-100 transition-colors cursor-pointer"
+                    >
+                      {emoji.flag}
+                    </span>
+                    <div className="absolute -top-10 left-1/2 transform -translate-x-1/2 bg-white text-gray-900 px-3 py-1 rounded shadow-md text-sm whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                      {emoji.country}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
           <ScrollingImages images={travelPhotos} />
@@ -380,15 +384,15 @@ const Fun = () => {
     } else if (activeTab === 'Sports') {
       return (
         <>
-          <div className="flex items-start space-x-10">
-            <div className="w-2/5">
-              <p className="text-gray-600 text-lg leading-relaxed">
+          <div className="flex flex-col lg:flex-row lg:items-start lg:space-x-10">
+            <div className="w-full lg:w-2/5 mb-8 lg:mb-0">
+              <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
                 Baseball has been a huge part of my life. I've had the privilege of visiting some of America's most iconic ballparks, each with its own unique character and atmosphere.
               </p>
             </div>
 
-            <div className="w-3/5">
-              <div className="grid grid-cols-3 gap-4 pt-1">
+            <div className="w-full lg:w-3/5">
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-1">
                 {baseballTeams.map((team, index) => (
                   <div
                     key={index}
@@ -397,9 +401,9 @@ const Fun = () => {
                     <img 
                       src={team.logo} 
                       alt={`${team.name} logo`} 
-                      className="h-8 w-8 object-contain mb-1"
+                      className="h-6 sm:h-8 w-6 sm:w-8 object-contain mb-1"
                     />
-                    <span className="font-medium text-sm text-gray-900 text-center">{team.name}</span>
+                    <span className="font-medium text-xs sm:text-sm text-gray-900 text-center">{team.name}</span>
                     <span className="text-xs text-gray-500 text-center whitespace-nowrap">{team.stadium}</span>
                   </div>
                 ))}
@@ -412,14 +416,14 @@ const Fun = () => {
     } else if (activeTab === 'Music') {
       return (
         <>
-          <div className="flex items-start space-x-10">
-            <div className="w-2/5">
-              <p className="text-gray-600 text-lg leading-relaxed">
+          <div className="flex flex-col lg:flex-row lg:items-start lg:space-x-10">
+            <div className="w-full lg:w-2/5 mb-8 lg:mb-0">
+              <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
                 Music has always been a creative outlet for me. Through my YouTube channel, I share my passion for music by creating unique covers and original compositions, blending different genres and styles.
               </p>
             </div>
 
-            <div className="w-3/5">
+            <div className="w-full lg:w-3/5">
               <YouTubeStats />
             </div>
           </div>
@@ -431,7 +435,7 @@ const Fun = () => {
         <>
           <div className="space-y-8">
             <div className="w-full">
-              <p className="text-gray-600 text-lg leading-relaxed">
+              <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
                 I have a deep appreciation for filmmaking and visual storytelling. Beyond creating music, I enjoy capturing moments and telling stories through video. Here are some of my recent film projects.
               </p>
             </div>
@@ -454,7 +458,7 @@ const Fun = () => {
                     <p className="text-gray-500 mt-1">Director & Editor</p>
                   </div>
                   <div className="space-y-2">
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 text-base sm:text-lg">
                       Created for the NASA CineSpace Competition in 2021, this film explores the intersection of space exploration and human potential. Using NASA's archival footage combined with original cinematography, the piece aims to inspire viewers about the accessibility of space exploration in our modern era.
                     </p>
                   </div>
@@ -471,41 +475,41 @@ const Fun = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="pt-24">
+      <div className="pt-16 sm:pt-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex gap-24">
+          <div className="flex flex-col lg:flex-row lg:gap-24">
             {/* Left column with Fun title and description */}
-            <div className="w-1/3">
-              <h1 className="text-8xl mb-12 font-faction">Fun</h1>
-              <p className="text-gray-600 text-lg leading-relaxed">
+            <div className="w-full lg:w-1/3 mb-8 lg:mb-0">
+              <h1 className="text-6xl sm:text-7xl lg:text-8xl mb-8 lg:mb-12 font-faction">Fun</h1>
+              <p className="text-gray-600 text-base sm:text-lg leading-relaxed">
                 Curiosity and creativity have always been central to my life. When I'm not tinkering at work, I love exploring, learning, trying new things and diving into new hobbies. Here are just a few of the things I've made.
               </p>
             </div>
 
             {/* Right column with sections */}
-            <div className="w-2/3">
+            <div className="w-full lg:w-2/3">
               {/* Navigation */}
-              <div className="flex gap-12 mb-16 border-b">
+              <div className="flex flex-wrap gap-6 sm:gap-12 mb-12 lg:mb-16 border-b overflow-x-auto pb-4 scrollbar-hide">
                 <button 
-                  className={`pb-4 ${activeTab === 'Travel' ? 'text-black font-medium border-b-2 border-black' : 'text-gray-400'}`}
+                  className={`pb-4 whitespace-nowrap ${activeTab === 'Travel' ? 'text-black font-medium border-b-2 border-black' : 'text-gray-400'}`}
                   onClick={() => setActiveTab('Travel')}
                 >
                   Travel
                 </button>
                 <button 
-                  className={`pb-4 ${activeTab === 'Sports' ? 'text-black font-medium border-b-2 border-black' : 'text-gray-400'}`}
+                  className={`pb-4 whitespace-nowrap ${activeTab === 'Sports' ? 'text-black font-medium border-b-2 border-black' : 'text-gray-400'}`}
                   onClick={() => setActiveTab('Sports')}
                 >
                   Sports
                 </button>
                 <button 
-                  className={`pb-4 ${activeTab === 'Music' ? 'text-black font-medium border-b-2 border-black' : 'text-gray-400'}`}
+                  className={`pb-4 whitespace-nowrap ${activeTab === 'Music' ? 'text-black font-medium border-b-2 border-black' : 'text-gray-400'}`}
                   onClick={() => setActiveTab('Music')}
                 >
                   Music
                 </button>
                 <button 
-                  className={`pb-4 ${activeTab === 'Film' ? 'text-black font-medium border-b-2 border-black' : 'text-gray-400'}`}
+                  className={`pb-4 whitespace-nowrap ${activeTab === 'Film' ? 'text-black font-medium border-b-2 border-black' : 'text-gray-400'}`}
                   onClick={() => setActiveTab('Film')}
                 >
                   Film
